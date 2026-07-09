@@ -2,6 +2,8 @@
 
 Static portfolio site for robotics, embedded firmware, PCB debugging, ROS2/micro-ROS, and BCI/EEG project work.
 
+Live site: https://vadimfedorovsv.github.io/robotics-portfolio/
+
 ## Projects Featured
 
 - Krysalis Robotic Hand
