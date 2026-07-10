@@ -296,8 +296,7 @@ h3 {
 }
 
 .two-column,
-.contact-layout,
-.stack-layout {
+.contact-layout {
   display: grid;
   grid-template-columns: minmax(240px, 0.82fr) minmax(0, 1.18fr);
   gap: clamp(28px, 5vw, 64px);
@@ -356,6 +355,16 @@ h3 {
 .text-link {
   color: var(--red);
   font-weight: 800;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+}
+
+.muted-link {
+  color: var(--green);
 }
 
 .project-visual {
@@ -422,6 +431,55 @@ figcaption {
   font-size: 16px;
 }
 
+.research-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(18px, 4vw, 48px);
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.research-card h3 {
+  max-width: 820px;
+  margin-bottom: 10px;
+  font-size: clamp(22px, 2vw, 30px);
+}
+
+.paper-meta {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.research-abstract {
+  max-width: 920px;
+  margin-bottom: 0;
+  color: #334139;
+  font-size: 16px;
+}
+
+.plot-heading {
+  display: grid;
+  gap: 4px;
+  margin: 22px 0 12px;
+}
+
+.plot-heading .project-kicker {
+  margin-bottom: 0;
+}
+
+.plot-heading p:last-child {
+  max-width: 680px;
+  margin-bottom: 0;
+  color: #334139;
+  font-size: 15px;
+}
+
 .evidence-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -446,18 +504,37 @@ figcaption {
 }
 
 .stack-layout {
+  display: grid;
+  gap: 20px;
   align-items: start;
+}
+
+.stack-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 0.7fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: end;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.stack-heading h2 {
+  font-size: clamp(26px, 3vw, 40px);
+}
+
+.stack-heading .section-note {
+  margin: 0 0 4px;
 }
 
 .stack-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .stack-item {
-  min-height: 112px;
-  padding: 18px;
+  min-height: 92px;
+  padding: 14px 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
@@ -492,6 +569,19 @@ figcaption {
   max-width: 840px;
   font-size: clamp(26px, 2.8vw, 38px);
   line-height: 1.08;
+}
+
+.contact-email {
+  display: inline-block;
+  margin-top: 14px;
+  color: #d9f5eb;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.contact-email:hover {
+  color: #fff;
 }
 
 .contact-layout {
@@ -555,10 +645,16 @@ figcaption {
 
   .two-column,
   .contact-layout,
+  .research-card,
+  .stack-heading,
   .stack-layout,
   .project-feature,
   .project-feature.reverse {
     grid-template-columns: 1fr;
+  }
+
+  .stack-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .project-feature.reverse .project-copy,
@@ -617,6 +713,10 @@ figcaption {
   .evidence-grid,
   .stack-grid {
     grid-template-columns: 1fr;
+  }
+
+  .research-card {
+    align-items: start;
   }
 
   .site-footer {
