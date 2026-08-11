@@ -104,13 +104,16 @@
             <div class="project-copy">
               <p class="project-kicker">BCI / Python decoder / actuator safety</p>
               <h3>BCI Prosthetic Leg Control</h3>
-              <p>Public robotics/BCI portfolio project for translating EEG motor-imagery features into safe actuator trigger commands for a prosthetic-leg test rig.</p>
+              <p>Public robotics/BCI portfolio project for translating EEG motor-imagery features into safe actuator trigger commands for a prosthetic-leg test rig. The current live-demo path is a corrected minimal setup: Cyton EEG to laptop decoder to Arduino Mega serial trigger.</p>
               <ul class="tight-list">
                 <li>Built live OpenBCI/Cyton decoding with BrainFlow, filtering, CSP feature extraction, and LDA scoring.</li>
                 <li>Added dry-run-first safety gates, thresholding, refractory timing, and REST-trial output blocking.</li>
-                <li>Published replay reports that separate in-session signal quality from cross-session generalization risk.</li>
+                <li>Published a minimal run path with a Windows launcher, Arduino trigger sketch, and compact live-demo requirements.</li>
               </ul>
-              <a class="text-link" href="https://github.com/vadimfedorovsv/bci-prosthetic-leg-control" target="_blank" rel="noreferrer">Open the BCI repository</a>
+              <div class="project-links">
+                <a class="text-link" href="https://github.com/vadimfedorovsv/bci-prosthetic-leg-control" target="_blank" rel="noreferrer">Open the BCI repository</a>
+                <a class="text-link muted-link" href="https://github.com/vadimfedorovsv/bci-prosthetic-leg-control/blob/main/LIVE_DEMO_QUICKSTART.md" target="_blank" rel="noreferrer">Live demo quickstart</a>
+              </div>
             </div>
             <figure class="project-visual evidence">
               <img src="assets/bci/decoder_metrics_summary.png" alt="BCI decoder metrics summary plot.">
