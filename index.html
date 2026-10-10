@@ -102,13 +102,14 @@
 
           <article class="project-feature reverse" id="bci">
             <div class="project-copy">
-              <p class="project-kicker">BCI / Python decoder / actuator safety</p>
+              <p class="project-kicker">Neurotech Club / EEG collection / signal processing</p>
               <h3>BCI Prosthetic Leg Control</h3>
-              <p>Public robotics/BCI portfolio project for translating EEG motor-imagery features into safe actuator trigger commands for a prosthetic-leg test rig. The current live-demo path is a corrected minimal setup: Cyton EEG to laptop decoder to Arduino Mega serial trigger.</p>
+              <p>In the Neurotech Club Projects Division, I built a motor-imagery control pipeline for a prosthetic-leg test rig, from cued ankle-imagery EEG collection through signal processing, decoding, and a guarded actuator trigger.</p>
               <ul class="tight-list">
-                <li>Built live OpenBCI/Cyton decoding with BrainFlow, filtering, CSP feature extraction, and LDA scoring.</li>
-                <li>Added dry-run-first safety gates, thresholding, refractory timing, and REST-trial output blocking.</li>
-                <li>Published a minimal run path with a Windows launcher, Arduino trigger sketch, and compact live-demo requirements.</li>
+                <li>Designed and ran labeled MOVE/REST trials with an eight-channel OpenBCI Cyton and cue markers.</li>
+                <li>Built an XDF/MNE pipeline for notch and bandpass filtering, common-average referencing, artifact rejection, cue epoching, and CSP/LDA decoding.</li>
+                <li>Connected live BrainFlow scoring to an Arduino Mega trigger, with dry-run mode, decision thresholds, refractory timing, and REST-output blocking.</li>
+                <li>Compared replay and session-holdout results to assess reliability before hardware-facing tests.</li>
               </ul>
               <div class="project-links">
                 <a class="text-link" href="https://github.com/vadimfedorovsv/bci-prosthetic-leg-control" target="_blank" rel="noreferrer">Open the BCI repository</a>
