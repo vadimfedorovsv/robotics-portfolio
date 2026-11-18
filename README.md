@@ -1,35 +1,36 @@
-# Vadim Fedorov Robotics Portfolio
+# Vadim Fedorov — Robotics Portfolio
 
-Static portfolio site for robotics, embedded firmware, PCB debugging, ROS2/micro-ROS, and BCI/EEG project work.
+Personal portfolio for robotics firmware, PCB design and bring-up, micro-ROS, and EEG/BCI work.
 
-Live site: https://vadimfedorovsv.github.io/robotics-portfolio/
+**Live:** https://vadimfedorovsv.github.io/robotics-portfolio/
 
-Resume PDF: `assets/resume/Vadim_Fedorov_Resume.pdf`
+## Featured projects
 
-## Projects Featured
+- **Krysalis Robotic Hand** — I2C firmware rewrite (~50 ms teleop latency), control and power-distribution PCBs, wrist actuator integration.
+- **BCI Prosthetic Leg Control** — 8-channel motor-imagery EEG pipeline (MNE, CSP + LDA) driving a guarded Arduino actuator trigger.
+- **PyBCI Live EEG Interface** — open-source live acquisition, real-time plots, and recording controls.
 
-- Krysalis Robotic Hand
-- BCI Prosthetic Leg Control
-- PyBCI live-streaming interface contribution
+## Stack
 
-## Next Portfolio Additions
+Next.js (static export) · Tailwind CSS · shadcn/ui · [Cult UI](https://www.cult-ui.com) components · Motion
 
-- Add narrated 45-60 second walkthrough videos for Krysalis Hand and BCI Prosthetic Leg Control.
-- Add a direct YouTube or file link for each walkthrough once recorded.
-- Re-check each public GitHub repo README for a clear setup/run section before outreach.
+## Editing content
 
-## Local Preview
+All copy (projects, experience, skills, links) lives in [`lib/data.ts`](lib/data.ts). Images, video, and the résumé PDF are in `public/assets/`.
 
-```powershell
-python -m http.server 5173
+## Run locally
+
+```bash
+npm install
+npm run dev
 ```
 
-Then open:
+Open http://localhost:3000.
 
-```text
-http://127.0.0.1:5173
-```
+## Deploy
 
-## Public-Safety Notes
+Every push to `main` builds the static site and publishes it to GitHub Pages via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 
-The site uses public-safe summaries, generated diagrams, a muted Krysalis lab demo video, public BCI result plots, and a sanitized PyBCI livestream widget capture rendered with demo signal data. It does not include private lab code, unreleased CAD/PCB files, raw EEG recordings, live logs, or subject/session identifiers.
+## Public-safety notes
+
+The site uses public-safe summaries, a muted lab demo video, public BCI result plots, and a sanitized PyBCI capture rendered with demo signal data. It does not include private lab code, unreleased CAD/PCB files, raw EEG recordings, or subject/session identifiers.
