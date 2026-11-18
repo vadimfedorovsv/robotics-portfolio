@@ -16,9 +16,9 @@ export const profile = {
 };
 
 export const about = [
-  "I'm an Electrical Engineering student at UC Davis and an undergraduate researcher at the Laboratory for AI, Robotics, and Automation (LARA), where I work on the firmware and electronics of the Krysalis humanoid hand.",
-  "I like debugging at the bench. When something fails, I set up a test that isolates it and work through the firmware and hardware until I've fixed the cause, not just the symptom. On the hand, that meant tracing teleoperation crashes to I2C bus contention and limited simultaneous motion to a shared power feed.",
-  "Outside the lab, I built an EEG decoding pipeline for a prosthetic-leg project with the UC Davis Neurotech Club, and I contribute to PyBCI, an open-source EEG project.",
+  "I grew up in Sunnyvale, where my dad was always handing me puzzles to solve. Some were physical, some were software, and over time they turned into programming and robotics. I got into robotics properly in high school and stuck with it.",
+  "Now I'm studying electrical engineering at UC Davis and working as an undergraduate researcher at the LARA lab, where I work on the firmware and electronics for the Krysalis humanoid robotic hand. On the side, I'm building an automated trading system.",
+  "Outside the technical work, I'm a pretty social, easygoing person. I like lifting the mood in a room and making people feel at home.",
 ];
 
 export type Stat = { value: number; prefix?: string; suffix?: string; label: string };

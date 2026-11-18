@@ -34,6 +34,13 @@ function NotePage({ slug }: { slug: string }) {
           {n.paragraphs.map((p) => (
             <p key={p}>{p}</p>
           ))}
+          {n.list && (
+            <ul className="list-disc space-y-3 pl-5 marker:text-subtle">
+              {n.list.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          )}
         </div>
       </Reveal>
     </Shell>
