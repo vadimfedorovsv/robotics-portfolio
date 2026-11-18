@@ -4,34 +4,38 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Palette: near-black with a cool green tint, one emerald accent (think scope trace on a dark bench). */
+/* Warm off-black and cream, like an old notebook under a desk lamp. */
 :root {
-  --background: #0a0d0c;
-  --foreground: #e6ebe9;
-  --muted: #141917;
-  --muted-foreground: #8a9590;
-  --card: #0f1312;
-  --card-foreground: #e6ebe9;
-  --popover: #0f1312;
-  --popover-foreground: #e6ebe9;
-  --primary: #34d399;
-  --primary-foreground: #04140d;
-  --secondary: #161c1a;
-  --secondary-foreground: #e6ebe9;
-  --accent: #34d399;
-  --accent-foreground: #04140d;
+  --background: #1a1918;
+  --foreground: #d9d4cb;
+  --heading: #f2efe9;
+  --subtle: #8c867c;
+  --rule: #2c2a28;
+  --muted: #232120;
+  --muted-foreground: #8c867c;
+  --card: #201f1d;
+  --card-foreground: #f2efe9;
+  --popover: #201f1d;
+  --popover-foreground: #f2efe9;
+  --primary: #f2efe9;
+  --primary-foreground: #1a1918;
+  --secondary: #232120;
+  --secondary-foreground: #f2efe9;
+  --accent: #232120;
+  --accent-foreground: #f2efe9;
   --destructive: #f87171;
-  --border: #1f2725;
-  --input: #1f2725;
-  --ring: #34d399;
-  --radius: 0.75rem;
-  --heading: #f4f7f6;
+  --border: #2c2a28;
+  --input: #2c2a28;
+  --ring: #f2efe9;
+  --radius: 0.5rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-heading: var(--heading);
+  --color-subtle: var(--subtle);
+  --color-rule: var(--rule);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -52,39 +56,51 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains);
+  --font-serif: var(--font-newsreader), "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/60;
+    @apply border-border outline-ring/50;
   }
   html {
-    scroll-behavior: smooth;
     color-scheme: dark;
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "cv11", "ss01";
+    font-size: 19px;
+    line-height: 1.6;
+  }
+  @media (min-width: 640px) {
+    body {
+      font-size: 20px;
+    }
   }
   ::selection {
-    background: color-mix(in oklab, var(--primary) 35%, transparent);
-    color: var(--heading);
+    background: #f2efe9;
+    color: #1a1918;
   }
 }
 
-/* Faint engineering-paper grid behind everything. */
-.grid-bg {
-  background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.025) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(ellipse at top, black 30%, transparent 75%);
+/* Underline that grows from left to right on hover. */
+.link {
+  color: var(--heading);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 250ms ease;
+  text-decoration: underline;
+  text-decoration-color: #5a564f;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.link:hover {
+  text-decoration-color: transparent;
+  background-size: 100% 1px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+/* Result plots are white PNGs; invert them so they sit on the dark page. */
+.plot-dark {
+  filter: invert(0.9) hue-rotate(180deg) sepia(0.08);
 }

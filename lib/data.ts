@@ -6,7 +6,7 @@ export const profile = {
   name: "Vadim Fedorov",
   role: "Electrical Engineering · UC Davis",
   tagline:
-    "I build and debug the firmware, circuit boards, and signal pipelines that make robots and brain-computer interfaces behave.",
+    "I write firmware and design PCBs for a robotic hand, and I built an EEG decoding pipeline for a prosthetic-leg brain-computer interface.",
   status: "Open to Summer 2027 internships",
   email: "vadimfedorov.sv@gmail.com",
   github: "https://github.com/vadimfedorovsv",
@@ -17,8 +17,8 @@ export const profile = {
 
 export const about = [
   "I'm an Electrical Engineering student at UC Davis and an undergraduate researcher at the Laboratory for AI, Robotics, and Automation (LARA), where I work on the firmware and electronics of the Krysalis humanoid hand.",
-  "I like the test-bench part of engineering. When something misbehaves, I build a test that isolates it, find the weakest link, and keep iterating across firmware and hardware until the fix holds, not just until the symptom goes away.",
-  "Outside the lab I build EEG pipelines with the UC Davis Neurotech Club and contribute to PyBCI, an open-source EEG research tool.",
+  "I like debugging at the bench. When something fails, I set up a test that isolates it and work through the firmware and hardware until I've fixed the cause, not just the symptom. On the hand, that meant tracing teleoperation crashes to I2C bus contention and limited simultaneous motion to a shared power feed.",
+  "Outside the lab, I built an EEG decoding pipeline for a prosthetic-leg project with the UC Davis Neurotech Club, and I contribute to PyBCI, an open-source EEG project.",
 ];
 
 export type Stat = { value: number; prefix?: string; suffix?: string; label: string };
@@ -74,21 +74,21 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        label: "Problem",
-        body: "Teleoperation crashed about every two seconds, and the hand couldn't move several fingers at once.",
+        label: "Symptoms",
+        body: "Teleoperation crashed about every two seconds, and the hand struggled to move several fingers at once.",
       },
       {
-        label: "What I did",
+        label: "Fixes",
         body: [
-          "Traced the crashes to I2C bus contention and rewrote firmware on both the inbound and outbound signal paths.",
+          "Traced the crashes to I2C bus contention and rewrote the firmware on both signal paths.",
           "Designed and brought up custom control PCBs, adding I2C pull-ups and dedicated voltage regulation.",
-          "Found a shared power feed running through the PCB stack and designed a separate parallel power-distribution board in KiCad.",
-          "Integrated two wrist rotary actuators into the glove → PyBullet → micro-ROS pipeline.",
+          "Traced the motion limit to a shared power feed through the PCB stack, then designed a separate parallel power distribution board in KiCad.",
+          "Integrated two wrist rotary actuators into the teleoperation pipeline (Manus glove, PyBullet, micro-ROS).",
         ],
       },
       {
-        label: "Result",
-        body: "Stable control at ~50 ms end-to-end latency, every motor at full PWM with no freezes, and teleoperation extended from finger joints to the wrist.",
+        label: "After",
+        body: "Control holds at about 50 ms end-to-end latency. All motors run at full PWM without freezing or lagging, and teleoperation now covers the wrist as well as the hand joints.",
       },
     ],
     badges: ["~50 ms latency", "19 actuators", "Control + power PCBs"],
@@ -103,7 +103,7 @@ export const projects: Project[] = [
     title: "BCI Prosthetic Leg Control",
     meta: "Neurotech Club · Dec 2025 – Jun 2026",
     summary:
-      "End-to-end motor-imagery control: from recording EEG to a guarded actuator trigger on a prosthetic-leg test rig.",
+      "Decodes ankle motor imagery from EEG and uses it to trigger an Arduino Mega actuator on a prosthetic-leg test rig.",
     media: {
       kind: "images",
       srcs: [
@@ -115,19 +115,19 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        label: "Collect",
+        label: "Recording",
         body: "Designed and ran a cued ankle motor-imagery paradigm, recording labeled MOVE/REST trials on an 8-channel OpenBCI Cyton.",
       },
       {
-        label: "Decode",
+        label: "Decoding",
         body: "Built the MNE pipeline: XDF import, 60 Hz notch, 8–30 Hz bandpass, common-average reference, artifact rejection, epoching, CSP + LDA.",
       },
       {
-        label: "Act safely",
-        body: "Linked live BrainFlow decoding to an Arduino Mega trigger with dry-run mode, decision thresholds, refractory timing, and REST-output blocking, then validated on replay and session holdout.",
+        label: "Trigger",
+        body: "Linked live BrainFlow decoding to an Arduino Mega trigger with a dry-run mode, decision thresholds, refractory timing, and REST-output blocking, then checked it on replay and session holdout.",
       },
     ],
-    badges: ["8-ch EEG", "CSP + LDA", "Hardware safety gates"],
+    badges: ["8-ch EEG", "CSP + LDA", "Arduino Mega trigger"],
     tags: ["Python", "MNE", "BrainFlow", "OpenBCI", "Arduino"],
     links: [
       { label: "Repository", href: "https://github.com/vadimfedorovsv/bci-prosthetic-leg-control" },
@@ -154,11 +154,11 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        label: "What I built",
+        label: "My part",
         body: [
-          "The acquisition and streaming backend that connects board data to the research interface.",
+          "The live EEG acquisition and streaming backend.",
           "Stacked real-time EEG plots in the frontend.",
-          "Start, pause, save, and stop recording controls, so a full session runs from one window.",
+          "Start, pause, save, and stop controls for recording.",
         ],
       },
     ],
@@ -169,34 +169,34 @@ export const projects: Project[] = [
 
 export const experience = [
   {
-    dates: "2026 — Now",
+    dates: "2026 – Now",
     title: "Undergraduate Robotics Researcher",
     org: "LARA · UC Davis",
     href: "https://arxiv.org/abs/2504.12967",
-    body: "Firmware, PCB design, and power distribution for the Krysalis humanoid hand; wrist actuator integration into the micro-ROS teleoperation stack.",
+    body: "I write firmware and design the control and power PCBs for the Krysalis humanoid hand, and I added two wrist actuators to its micro-ROS teleoperation setup.",
     tags: ["Firmware", "KiCad", "micro-ROS"],
   },
   {
-    dates: "2026 — Now",
+    dates: "2026 – Now",
     title: "Open-Source Contributor",
     org: "PyBCI",
     href: "https://github.com/prithvirajmody/PyBCI",
-    body: "Live EEG acquisition backend, real-time plotting, and recording controls.",
+    body: "Built the live EEG streaming backend, the real-time plots, and the recording controls.",
     tags: ["Python", "BrainFlow"],
   },
   {
-    dates: "2025 — 2026",
+    dates: "2025 – 2026",
     title: "Projects Division Member",
     org: "Neurotech Club · UC Davis",
     href: "https://github.com/vadimfedorovsv/bci-prosthetic-leg-control",
-    body: "EEG collection, decoding, and actuator-safety work for the BCI prosthetic-leg project.",
+    body: "Ran the EEG motor-imagery sessions and built the decoding pipeline and Arduino trigger logic for the BCI prosthetic-leg project.",
     tags: ["EEG", "MNE", "Arduino"],
   },
   {
-    dates: "2024 — 2025",
+    dates: "2024 – 2025",
     title: "Customer Service Representative",
     org: "Cherry Chase Pet Hospital",
-    body: "Client communication across phone, email, and front desk; coordinated appointments and intake with veterinary staff during peak hours.",
+    body: "Customer service at a veterinary hospital in Sunnyvale.",
     tags: [],
   },
 ];
