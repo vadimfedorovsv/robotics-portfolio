@@ -687,17 +687,26 @@ const HoverVideoPlayer: React.FC<HoverVideoPlayerProps> = ({
         onHoverEnd={handleHoverEnd}
         onTouchStart={handleTouchStart}
         // Keyboard access: Enter/Space toggles playback, leaving focus stops it.
+        // Playback intent is isHovering on desktop and controlsVisible on mobile.
         tabIndex={0}
         role="button"
-        aria-label={state.isHovering ? "Pause demo video" : "Play demo video"}
-        aria-pressed={state.isHovering}
+        aria-label={state.isPlaying ? "Pause demo video" : "Play demo video"}
+        aria-pressed={state.isPlaying}
         onKeyDown={(e) => {
+          if (e.target !== e.currentTarget) return // let nested controls handle their own keys
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault()
-            setState((prev) => ({ ...prev, isHovering: !prev.isHovering }))
+            setState((prev) =>
+              prev.isMobile
+                ? { ...prev, controlsVisible: !prev.controlsVisible }
+                : { ...prev, isHovering: !prev.isHovering }
+            )
           }
         }}
-        onBlur={() => setState((prev) => ({ ...prev, isHovering: false }))}
+        onBlur={(e) => {
+          if (e.currentTarget.contains(e.relatedTarget as Node | null)) return
+          setState((prev) => ({ ...prev, isHovering: false, controlsVisible: false }))
+        }}
       >
         {/* Video Element */}
         {state.isInView && (
