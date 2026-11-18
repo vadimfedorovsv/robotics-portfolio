@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion";
 import { SectionTitle, Shell } from "@/components/shell";
 import { about, asset, experience, profile, projects, publication } from "@/lib/data";
+import { notes } from "@/lib/notes";
 
 export default function Home() {
   return (
@@ -37,6 +38,23 @@ export default function Home() {
           </p>
         </section>
       </Reveal>
+
+      {notes.length > 0 && (
+        <Reveal step={2}>
+          <section className="mt-14">
+            <SectionTitle>Notes</SectionTitle>
+            <ul className="grid gap-x-8 gap-y-2 sm:grid-cols-2">
+              {notes.map((n) => (
+                <li key={n.slug}>
+                  <Link href={`/${n.slug}/`} className="link">
+                    {n.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </Reveal>
+      )}
 
       <Reveal step={2}>
         <section className="mt-14">

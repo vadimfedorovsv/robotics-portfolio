@@ -75,7 +75,7 @@ export const projects: Project[] = [
     sections: [
       {
         label: "Symptoms",
-        body: "Teleoperation crashed about every two seconds, and the hand struggled to move several fingers at once.",
+        body: "For days, teleoperation crashed after about two seconds of use, and the hand struggled to move several fingers at once.",
       },
       {
         label: "Fixes",

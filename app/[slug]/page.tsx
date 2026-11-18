@@ -5,17 +5,39 @@ import { HoverVideoPlayer } from "@/components/ui/hover-video-player";
 import { Reveal } from "@/components/motion";
 import { Shell } from "@/components/shell";
 import { asset, projects, type Project } from "@/lib/data";
+import { notes } from "@/lib/notes";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.id }));
+  return [...projects.map((p) => ({ slug: p.id })), ...notes.map((n) => ({ slug: n.slug }))];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const p = projects.find((x) => x.id === slug);
-  return p ? { title: p.title, description: p.summary } : {};
+  if (p) return { title: p.title, description: p.summary };
+  const n = notes.find((x) => x.slug === slug);
+  return n ? { title: n.title, description: n.paragraphs[0]?.slice(0, 150) } : {};
+}
+
+function NotePage({ slug }: { slug: string }) {
+  const n = notes.find((x) => x.slug === slug);
+  if (!n) notFound();
+  return (
+    <Shell back>
+      <Reveal>
+        <h1 className="mb-8 text-[1.6em] leading-tight font-medium tracking-tight text-heading">{n.title}</h1>
+      </Reveal>
+      <Reveal step={1}>
+        <div className="space-y-5 text-heading/90">
+          {n.paragraphs.map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </div>
+      </Reveal>
+    </Shell>
+  );
 }
 
 function Media({ media }: { media: Project["media"] }) {
@@ -67,7 +89,7 @@ function Media({ media }: { media: Project["media"] }) {
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = projects.find((x) => x.id === slug);
-  if (!p) notFound();
+  if (!p) return <NotePage slug={slug} />;
 
   return (
     <Shell back>
