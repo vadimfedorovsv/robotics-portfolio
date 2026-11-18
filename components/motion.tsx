@@ -40,6 +40,9 @@ export function StatCounter({ stat }: { stat: Stat }) {
   const reduce = useReducedMotion();
   // Always render 0 first so server HTML and the first client render match.
   const [value, setValue] = useState(0);
+  // Server HTML never knows the user's motion preference, so branch on it only after mount.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (inView || reduce) setValue(stat.value);
@@ -49,7 +52,8 @@ export function StatCounter({ stat }: { stat: Stat }) {
     <div ref={ref} className="min-w-0">
       <dd className="font-mono text-2xl font-medium tracking-tight text-heading tabular-nums sm:text-3xl">
         {stat.prefix}
-        <RollingNumber value={value} />
+        {/* Reduced-motion users see the final number with no counting animation. */}
+        {mounted && reduce ? stat.value : <RollingNumber value={value} />}
         <span className="text-primary">{stat.suffix}</span>
       </dd>
       <dt className="mt-1 text-xs leading-snug text-muted-foreground">{stat.label}</dt>
@@ -83,15 +87,29 @@ export function useActiveSection(ids: string[]) {
   const [active, setActive] = useState(ids[0]);
   useEffect(() => {
     const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      { rootMargin: "-30% 0px -60% 0px" },
-    );
-    els.forEach((el) => obs.observe(el));
-    return () => obs.disconnect();
+    const onChange = (entries: IntersectionObserverEntry[]) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible[0]) setActive(visible[0].target.id);
+    };
+    let obs: IntersectionObserver | null = null;
+    // Watch a band from 30% to 40% of the viewport height. Margins are in px because
+    // percentage rootMargins are not reliably resolved against the viewport height.
+    const build = () => {
+      obs?.disconnect();
+      const h = window.innerHeight;
+      obs = new IntersectionObserver(onChange, {
+        rootMargin: `-${Math.round(h * 0.3)}px 0px -${Math.round(h * 0.6)}px 0px`,
+      });
+      els.forEach((el) => obs!.observe(el));
+    };
+    build();
+    window.addEventListener("resize", build);
+    return () => {
+      window.removeEventListener("resize", build);
+      obs?.disconnect();
+    };
   }, [ids]);
   return active;
 }

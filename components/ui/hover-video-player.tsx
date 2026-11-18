@@ -335,18 +335,9 @@ const HoverVideoPlayer: React.FC<HoverVideoPlayerProps> = ({
         })
     }
 
-    if (video.readyState >= 3) {
-      console.log("Video ready, attempting immediate play")
-      attemptPlay()
-    } else {
-      console.log("Video not ready, waiting for canplay event")
-      const handleCanPlay = () => {
-        console.log("Canplay event fired")
-        video.removeEventListener("canplay", handleCanPlay)
-        attemptPlay()
-      }
-      video.addEventListener("canplay", handleCanPlay)
-    }
+    // play() itself starts buffering, so call it directly even when the video
+    // has not loaded yet (with preload="none", canplay would never fire first).
+    attemptPlay()
   }, [state.isInView])
 
   const pauseVideo = useCallback(() => {
@@ -684,7 +675,7 @@ const HoverVideoPlayer: React.FC<HoverVideoPlayerProps> = ({
       <motion.div
         ref={containerRef}
         className={cn(
-          "group relative cursor-pointer overflow-hidden",
+          "group relative cursor-pointer overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
           className
         )}
         style={{
@@ -695,6 +686,18 @@ const HoverVideoPlayer: React.FC<HoverVideoPlayerProps> = ({
         onHoverStart={handleHoverStart}
         onHoverEnd={handleHoverEnd}
         onTouchStart={handleTouchStart}
+        // Keyboard access: Enter/Space toggles playback, leaving focus stops it.
+        tabIndex={0}
+        role="button"
+        aria-label={state.isHovering ? "Pause demo video" : "Play demo video"}
+        aria-pressed={state.isHovering}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault()
+            setState((prev) => ({ ...prev, isHovering: !prev.isHovering }))
+          }
+        }}
+        onBlur={() => setState((prev) => ({ ...prev, isHovering: false }))}
       >
         {/* Video Element */}
         {state.isInView && (

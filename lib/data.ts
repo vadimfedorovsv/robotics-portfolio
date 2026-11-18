@@ -91,7 +91,7 @@ export const projects: Project[] = [
         body: "Stable control at ~50 ms end-to-end latency, every motor at full PWM with no freezes, and teleoperation extended from finger joints to the wrist.",
       },
     ],
-    badges: ["~50 ms latency", "19 actuators", "2 PCBs designed"],
+    badges: ["~50 ms latency", "19 actuators", "Control + power PCBs"],
     tags: ["C/C++", "I2C", "KiCad", "Board bring-up", "micro-ROS", "PyBullet", "Teensy"],
     links: [
       { label: "Case study", href: "https://github.com/vadimfedorovsv/krysalis-hand-case-study" },
@@ -111,7 +111,7 @@ export const projects: Project[] = [
         { src: "/assets/bci/threshold_tradeoff.png", alt: "Decision-threshold tradeoff for live actuator triggering." },
         { src: "/assets/bci/trial_timeline.png", alt: "Replay timeline of classifier scores across MOVE and REST windows." },
       ],
-      caption: "The gap between cross-validation and holdout accuracy is what set the safety thresholds.",
+      caption: "Decoder diagnostics from the public repo: cross-validation vs. session holdout, threshold tradeoff, and replay timeline.",
     },
     sections: [
       {
