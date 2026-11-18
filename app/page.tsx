@@ -14,7 +14,7 @@ export default function Home() {
             alt=""
             width={56}
             height={56}
-            className="size-14 rounded-full object-cover grayscale-[30%]"
+            className="size-14 rounded-full object-cover"
           />
           <div>
             <h1 className="text-[1.6em] leading-tight font-medium tracking-tight text-heading">{profile.name}</h1>
