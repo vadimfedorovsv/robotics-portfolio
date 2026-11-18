@@ -40,7 +40,7 @@ export const notes: Note[] = [
     title: "Why neurotech",
     paragraphs: [
       "I joined the Neurotech Club because it combines hardware and software in a really interesting way, and it lets you interface with human thoughts and the body.",
-      "For our prosthetic-leg project, I worked on the EEG decoding pipeline, and we got it working live on a small 3D-printed demo.",
+      "For our prosthetic-leg project, I built the whole classifier and all of the software for it myself, and we got it working live on a small 3D-printed demo.",
     ],
   },
   {

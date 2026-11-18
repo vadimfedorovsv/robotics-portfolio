@@ -120,7 +120,7 @@ export const projects: Project[] = [
       },
       {
         label: "Decoding",
-        body: "Built the MNE pipeline: XDF import, 60 Hz notch, 8–30 Hz bandpass, common-average reference, artifact rejection, epoching, CSP + LDA.",
+        body: "I built the classifier and all of the software myself. The MNE pipeline: XDF import, 60 Hz notch, 8–30 Hz bandpass, common-average reference, artifact rejection, epoching, CSP + LDA.",
       },
       {
         label: "Trigger",
