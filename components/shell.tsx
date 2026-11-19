@@ -4,7 +4,7 @@ import { asset, profile } from "@/lib/data";
 /** Narrow single column shared by every page. */
 export function Shell({ children, back = false }: { children: React.ReactNode; back?: boolean }) {
   return (
-    <div className="mx-auto min-h-screen max-w-[640px] px-6 pt-16 pb-20 sm:pt-24">
+    <div className="mx-auto min-h-screen max-w-[720px] px-6 pt-16 pb-20 sm:pt-24">
       {back && (
         <Link href="/" className="mb-12 inline-block text-[0.9em] text-subtle italic hover:text-heading">
           ← Vadim Fedorov

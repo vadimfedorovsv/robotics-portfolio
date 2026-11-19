@@ -76,6 +76,16 @@
       font-size: 20px;
     }
   }
+  @media (min-width: 1280px) {
+    body {
+      font-size: 21px;
+    }
+  }
+  @media (min-width: 1680px) {
+    body {
+      font-size: 22px;
+    }
+  }
   ::selection {
     background: #f2efe9;
     color: #1a1918;

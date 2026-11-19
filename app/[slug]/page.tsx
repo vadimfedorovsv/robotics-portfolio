@@ -50,8 +50,8 @@ function NotePage({ slug }: { slug: string }) {
 function Media({ media }: { media: Project["media"] }) {
   if (media.kind === "video") {
     return (
-      <figure className="my-10">
-        <div className="mx-auto max-w-[360px] overflow-hidden rounded-lg">
+      <figure className="my-10 lg:-mx-28">
+        <div className="mx-auto max-w-[360px] lg:max-w-[440px] overflow-hidden rounded-lg">
           <HoverVideoPlayer
             videoSrc={asset(media.src)}
             thumbnailSrc={asset(media.poster)}
@@ -78,7 +78,7 @@ function Media({ media }: { media: Project["media"] }) {
   const [first, ...rest] = media.srcs;
   const isPlot = first.src.includes("/bci/");
   return (
-    <figure className="my-10">
+    <figure className="my-10 lg:-mx-28">
       {/* eslint-disable @next/next/no-img-element */}
       <img src={asset(first.src)} alt={first.alt} className={`w-full rounded-lg ${isPlot ? "plot-dark" : ""}`} />
       {rest.length > 0 && (
