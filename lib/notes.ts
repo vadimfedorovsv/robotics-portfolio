@@ -56,7 +56,7 @@ export const notes: Note[] = [
     title: "Why I wrote about ethical AI",
     paragraphs: [
       "In 2024 I published a paper with Noah T. Curran in the Journal of Student Research about ethical AI in autonomous vehicles. It pulled together things I care about: electrical engineering, autonomous cars, and AI.",
-      "I also really enjoy philosophy and talking through moral questions. I think that kind of thinking has to be applied to AI, especially physical AI like autonomous vehicles.",
+      "I also really enjoy philosophy and talking through moral questions. I think that kind of thinking has to be applied to AI, especially in physical AI such as autonomous vehicles.",
     ],
   },
 ];
